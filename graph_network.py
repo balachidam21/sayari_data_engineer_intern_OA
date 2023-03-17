@@ -26,25 +26,6 @@ def create_graph(edges):
     return graph
 
 
-def plot_companies(graph, companies):
-    positions = graphviz_layout(graph)
-    nodes = [i for i in graph.nodes() if i not in entity_category]
-    plt.figure(1, figsize=(40, 40))
-    nx.draw_networkx(
-    graph,
-    positions,
-    nodelist=nodes,
-    node_size=20,
-    node_color="white",
-    edgecolors="black",
-    with_labels=True,
-    labels={node: node for node in nodes},
-    bbox=dict(facecolor="white", edgecolor="black", boxstyle="round,pad=0.3"),
-    )
-    plt.title(f"Graph with Company Names")
-    plt.savefig("company_graph.png")
-    # plt.show()
-    plt.close()
 
 def plot_network(graph):
     positions = graphviz_layout(graph)
@@ -52,6 +33,7 @@ def plot_network(graph):
     connected_subgraphs = (
         graph.subgraph(c) for c in nx.connected_components(graph)
     )
+    # print(connected_subgraphs)
     for connected_subgraph in connected_subgraphs:
         random_color = [random.random()] * nx.number_of_nodes(connected_subgraph)
         if len(connected_subgraph.nodes()) > 1:
@@ -68,7 +50,7 @@ def plot_network(graph):
             
     plt.title("Connected SubGraphs of companies and Entities")
     plt.savefig("connected.png")
-    # plt.show()
+    plt.show()
     plt.close()
     
 
@@ -81,9 +63,8 @@ if __name__ == "__main__":
     
     businessDetails = {k:v for x in details for k,v in x.items()}
     edges = get_relationships(business, businessDetails)
-    companies = [x[0] for x in edges]
+    # companies = [x[0] for x in edges]
     network = create_graph(edges)
-    plot_companies(network, companies)
     plot_network(network)
 
         
