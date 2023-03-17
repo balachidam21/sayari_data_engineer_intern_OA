@@ -20,6 +20,7 @@ Your task:
 3. Based on the crawled data obtained from 2, 
     * We were able to construct a graph with Entity Linking which connects company names with their entities Commercial Registered Agent, Registered Agent, Owners respectively.
     * The Network is a Connected Components SubGraph which visualizes companies with common entities. The graph can be found [here](connected.png).
+    **Note:** The Node labels have been removed from the graph for the sake of good visualization. The labels can be added by changing the `with_labels` parameter in `networkx.draw()` function.
 
 
 
